@@ -15,8 +15,21 @@ test('it works', async t => {
   const page = await browser.newPage()
   await page.goto(`http://localhost:${port}`)
 
-  const paragraph = await findElement(page, 'p')
-  console.log(await paragraph.boundingBox())
+  const otherStuff = await findElement(page, 'p')
+  t.deepEqual(await otherStuff.boundingBox(), {
+    x: 8,
+    y: 16,
+    width: 784,
+    height: 18
+  })
+
+  const helloWorld = await findElement(page, 'p', 'Hello World!')
+  t.deepEqual(await helloWorld.boundingBox(), {
+    x: 8,
+    y: 50,
+    width: 784,
+    height: 18
+  })
 
   await browser.close()
   t.pass()
