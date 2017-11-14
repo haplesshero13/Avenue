@@ -6,7 +6,7 @@ import findElement from '../src/findElement'
 
 useServer()
 
-test('it works', async t => {
+test('finds elements by selector & text', async t => {
   const { port } = t.context
 
   const browser = await puppeteer.launch({
@@ -30,6 +30,22 @@ test('it works', async t => {
     width: 784,
     height: 18
   })
+
+  await browser.close()
+  t.pass()
+})
+
+test('finds delayed elements', async t => {
+  const { port } = t.context
+
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  })
+  const page = await browser.newPage()
+  await page.goto(`http://localhost:${port}`)
+
+  const delayedElement = await findElement(page, 'p', 'delayed element')
+  t.true(delayedElement !== null)
 
   await browser.close()
   t.pass()
