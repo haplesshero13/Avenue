@@ -1,19 +1,15 @@
 // @flow
 import test from 'ava'
 import { useServer } from './helpers'
-import puppeteer from 'puppeteer'
-import findElement from '../src/findElement'
+import { open, close, navigate, findElement } from '../src'
 
 useServer()
 
 test('finds elements by selector & text', async t => {
   const { port } = t.context
 
-  const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
-  })
-  const page = await browser.newPage()
-  await page.goto(`http://localhost:${port}`)
+  const browser = await open()
+  const page = await navigate(browser, `http://localhost:${port}`)
 
   const otherStuff = await findElement(page, 'p')
   t.deepEqual(await otherStuff.boundingBox(), {
@@ -31,22 +27,17 @@ test('finds elements by selector & text', async t => {
     height: 18
   })
 
-  await browser.close()
-  t.pass()
+  await close(browser)
 })
 
 test('finds delayed elements', async t => {
   const { port } = t.context
 
-  const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
-  })
-  const page = await browser.newPage()
-  await page.goto(`http://localhost:${port}`)
+  const browser = await open()
+  const page = await navigate(browser, `http://localhost:${port}`)
 
   const delayedElement = await findElement(page, 'p', 'delayed element')
   t.true(delayedElement !== null)
 
-  await browser.close()
-  t.pass()
+  await close(browser)
 })
