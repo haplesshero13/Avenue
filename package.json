@@ -1,27 +1,25 @@
 {
+  "main": "./src/index.js",
   "license": "MIT",
   "scripts": {
-    "test": "standard -v --fix && flow && ava"
+    "lint": "eslint src/ test/",
+    "build": "babel src --out-dir dist"
   },
   "devDependencies": {
-    "ava": "^0.23.0",
-    "babel-preset-diff": "^1.0.3",
-    "babel-register": "^6.26.0",
-    "css-to-xpath": "^0.1.0",
-    "flow-bin": "^0.59.0",
-    "node-static": "^0.7.10",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^4.12.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-import": "^2.8.0",
+    "node-static": "^0.7.10"
+  },
+  "dependencies": {
     "puppeteer": "^0.13.0",
-    "standard-esnext": "^4.0.1"
-  },
-  "babel": {
-    "presets": [
-      "diff"
-    ]
-  },
-  "ava": {
-    "babel": "inherit",
-    "require": [
-      "babel-register"
-    ]
+    "xpath-builder": "^0.0.7"
   }
 }

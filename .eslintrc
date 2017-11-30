@@ -1,0 +1,25 @@
+{
+    "extends": [
+      "airbnb-base",
+      "plugin:flowtype/recommended"
+    ],
+    "plugins": [
+      "flowtype"
+    ],
+    "parser": "babel-eslint",
+    "env": {
+      "node": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module"
+    },
+    "rules": {
+      "semi": ["error", "never"]
+    },
+    "overrides": [
+      {
+        "files": ["src/**/*.js", "test/**/*.js"]
+      }
+    ]
+}
